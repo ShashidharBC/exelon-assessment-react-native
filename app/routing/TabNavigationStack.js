@@ -7,9 +7,11 @@ import {
   MyCartScreen,
   MyProfileScreen,
   NotificationScreen,
+  ProductDetailScreen,
 } from '../screens';
 import * as Animatable from 'react-native-animatable';
 import {appColors} from '../utils/appColors';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const TabArr = [
   {
@@ -17,7 +19,7 @@ const TabArr = [
     label: 'Home',
     type: Icons.Feather,
     icon: 'home',
-    component: HomeScreen,
+    // component: HomeScreen,
     color: appColors?.primary,
     alphaClr: appColors?.primaryAlpha,
   },
@@ -60,7 +62,6 @@ const TabButton = props => {
 
   useEffect(() => {
     if (focused) {
-      // 0.3: { scale: .7 }, 0.5: { scale: .3 }, 0.8: { scale: .7 },
       viewRef.current.animate({0: {scale: 0}, 1: {scale: 1}});
       textViewRef.current.animate({0: {scale: 0}, 1: {scale: 1}});
     } else {
@@ -110,6 +111,16 @@ const TabButton = props => {
 };
 
 export default function AnimTab3() {
+  const Stack = createStackNavigator();
+  const StackScreens = () => {
+    return (
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen name="MyCart" component={MyCartScreen} />
+      </Stack.Navigator>
+    );
+  };
   return (
     <Tab.Navigator
       screenOptions={{
@@ -124,17 +135,31 @@ export default function AnimTab3() {
         },
       }}>
       {TabArr.map((item, index) => {
-        return (
-          <Tab.Screen
-            key={index}
-            name={item?.route}
-            component={item.component}
-            options={{
-              tabBarShowLabel: false,
-              tabBarButton: props => <TabButton {...props} item={item} />,
-            }}
-          />
-        );
+        if (item?.route === 'Home') {
+          return (
+            <Tab.Screen
+              key={index}
+              name={item?.route}
+              component={StackScreens}
+              options={{
+                tabBarShowLabel: false,
+                tabBarButton: props => <TabButton {...props} item={item} />,
+              }}
+            />
+          );
+        } else {
+          return (
+            <Tab.Screen
+              key={index}
+              name={item?.route}
+              component={item.component}
+              options={{
+                tabBarShowLabel: false,
+                tabBarButton: props => <TabButton {...props} item={item} />,
+              }}
+            />
+          );
+        }
       })}
     </Tab.Navigator>
   );

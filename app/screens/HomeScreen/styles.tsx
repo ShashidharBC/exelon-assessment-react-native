@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   },
   tabsContainer: {
     width: '100%',
-    marginTop: 16,
-    marginHorizontal: 8,
+    marginTop: 24,
+    marginHorizontal: 20,
   },
 });
 

@@ -127,3 +127,22 @@ export const trendingNowList = [
     image: SHOE_FOR_MEN,
   },
 ];
+
+export const colorFamilyList = [
+  {
+    id: 1,
+    title: 'Blue',
+  },
+  {
+    id: 2,
+    title: 'White',
+  },
+  {
+    id: 3,
+    title: 'Gray',
+  },
+  {
+    id: 4,
+    title: 'Red',
+  },
+];

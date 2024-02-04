@@ -1,9 +1,9 @@
-import {FlatList, Image, Text, View} from 'react-native';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import Icon, {Icons} from '../../../utils/icons';
 import {appColors} from '../../../utils/appColors';
 import {trendingNowList} from '../../../utils/StaticData';
 
-export const TrendingNowList = () => {
+export const TrendingNowList = ({onPressTrendingNowListItem}) => {
   const renderHeader = () => {
     return (
       <View
@@ -12,7 +12,10 @@ export const TrendingNowList = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        <Text style={{fontSize: 24, fontWeight: 'bold'}}>{'Trending Now'}</Text>
+        <Text
+          style={{fontSize: 24, fontWeight: 'bold', color: appColors?.black}}>
+          {'Trending Now'}
+        </Text>
         <Icon
           name={'arrowright'}
           type={Icons.AntDesign}
@@ -23,7 +26,11 @@ export const TrendingNowList = () => {
   };
   const renderTrendingNowList = item => {
     return (
-      <View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() =>
+          onPressTrendingNowListItem && onPressTrendingNowListItem(item)
+        }>
         <View>
           <Image
             source={item?.image}
@@ -50,12 +57,12 @@ export const TrendingNowList = () => {
             {item?.description}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
-    <View>
+    <View style={{marginTop: 30}}>
       {renderHeader()}
       <FlatList
         data={trendingNowList}

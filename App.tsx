@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text, useColorScheme} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import {appColors} from './app/utils/appColors';
 import {NavigationContainer} from '@react-navigation/native';
 import TabNavigationStack from './app/routing/TabNavigationStack';

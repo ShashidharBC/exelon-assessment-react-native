@@ -13,30 +13,44 @@ import Icon, {Icons} from '../../utils/icons';
 import {appColors} from '../../utils/appColors';
 import {TrendingNowList} from './components/trendingNowList';
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}) => {
   const renderProductList = item => {
     return (
-      <View>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => {
+          navigation.navigate('ProductDetail', {item});
+        }}>
         <View>
           <Image
             source={item?.image}
-            style={{width: 140, height: 160}}
+            style={{width: 160, height: 170}}
             resizeMode={'stretch'}
           />
         </View>
         <View>
-          <View>
-            <Text>{item?.title}</Text>
+          <View style={{marginBottom: 6}}>
+            <Text
+              style={{
+                fontSize: 18,
+                color: appColors?.black,
+                fontWeight: 'bold',
+              }}>
+              {item?.title}
+            </Text>
           </View>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
+              marginBottom: 5,
             }}>
             <Icon
               name={'star'}
               type={Icons.AntDesign}
               color={appColors?.primary}
+              size={16}
+              style={{marginRight: 8}}
             />
             <Text>{item?.rating}</Text>
           </View>
@@ -60,17 +74,18 @@ export const HomeScreen = () => {
                 color: appColors?.primary,
                 fontWeight: 'bold',
                 fontSize: 18,
+                marginRight: 10,
               }}>
               {item?.offerPtg}
             </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   const renderItem = item => {
     return (
-      <View>
+      <View style={{alignItems: 'center'}}>
         <TouchableOpacity
           style={{
             paddingVertical: 12,
@@ -79,20 +94,25 @@ export const HomeScreen = () => {
             borderWidth: 1,
             alignItems: 'center',
           }}>
-          <Text
-            style={{
-              color: 'black',
-              paddingTop: 6,
-              fontWeight: 'bold',
-            }}>
-            {item?.name}
-          </Text>
+          <Icon
+            name={item?.iconName}
+            type={item?.iconType}
+            color={item?.color}
+          />
         </TouchableOpacity>
+        <Text
+          style={{
+            color: 'black',
+            paddingTop: 6,
+            fontWeight: 'bold',
+          }}>
+          {item?.name}
+        </Text>
       </View>
     );
   };
   return (
-    <View>
+    <View style={{flex: 1}}>
       <SearchBar />
       <ScrollView>
         <View style={styles.tabsContainer}>
@@ -100,27 +120,32 @@ export const HomeScreen = () => {
             data={productTypes}
             renderItem={({item}) => renderItem(item)}
             keyExtractor={item => item.id}
-            contentContainerStyle={{columnGap: 12}}
+            contentContainerStyle={{
+              columnGap: 18,
+            }}
             horizontal
             showsHorizontalScrollIndicator={false}
           />
         </View>
-        <View>
+        <View style={{marginHorizontal: 20}}>
           <FlatList
             data={productList}
             renderItem={({item}) => renderProductList(item)}
             keyExtractor={item => item.id}
             contentContainerStyle={{
-              columnGap: 14,
-              marginHorizontal: 20,
+              columnGap: 16,
               marginVertical: 16,
             }}
             horizontal
             showsHorizontalScrollIndicator={false}
           />
         </View>
-        <View>
-          <TrendingNowList />
+        <View style={{marginHorizontal: 16}}>
+          <TrendingNowList
+            onPressTrendingNowListItem={item => {
+              console.log('I AM PRESSED: ', item);
+            }}
+          />
         </View>
       </ScrollView>
     </View>
