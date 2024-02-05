@@ -84,6 +84,12 @@ android {
         versionName "1.0"
     }
     signingConfigs {
+        release {
+            storeFile file('exelon-release-key.keystore')
+            storePassword 'exelon'
+            keyAlias 'exelon-key-alias'
+            keyPassword 'exelon'
+            }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
