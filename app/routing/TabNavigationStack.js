@@ -19,9 +19,9 @@ const TabArr = [
     label: 'Home',
     type: Icons.Feather,
     icon: 'home',
-    // component: HomeScreen,
-    color: appColors?.primary,
-    alphaClr: appColors?.primaryAlpha,
+    component: HomeScreen,
+    color: appColors?.black,
+    alphaClr: appColors?.white,
   },
   {
     route: 'Cart',
@@ -29,8 +29,8 @@ const TabArr = [
     type: Icons.Feather,
     icon: 'shopping-cart',
     component: MyCartScreen,
-    color: appColors?.green,
-    alphaClr: appColors?.primaryAlpha,
+    color: appColors?.black,
+    alphaClr: appColors?.white,
   },
   {
     route: 'Add',
@@ -38,8 +38,8 @@ const TabArr = [
     type: Icons.Ionicons,
     icon: 'notifications',
     component: NotificationScreen,
-    color: appColors?.primary,
-    alphaClr: appColors?.primaryAlpha,
+    color: appColors?.black,
+    alphaClr: appColors?.white,
   },
   {
     route: 'Profile',
@@ -47,8 +47,8 @@ const TabArr = [
     type: Icons.FontAwesome,
     icon: 'user',
     component: MyProfileScreen,
-    color: appColors?.primary,
-    alphaClr: appColors?.primaryAlpha,
+    color: appColors?.black,
+    alphaClr: appColors?.white,
   },
 ];
 
@@ -91,7 +91,7 @@ const TabButton = props => {
           <Icon
             type={item.type}
             name={item.icon}
-            color={focused ? appColors?.white : appColors?.primary}
+            color={focused ? appColors?.white : appColors?.black}
           />
           <Animatable.View ref={textViewRef}>
             {focused && (
@@ -132,6 +132,7 @@ export default function AnimTab3() {
           right: 16,
           left: 16,
           borderRadius: 16,
+          // backgroundColor: '#000',
         },
       }}>
       {TabArr.map((item, index) => {
